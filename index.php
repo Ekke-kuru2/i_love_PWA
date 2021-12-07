@@ -18,37 +18,15 @@ if($data = file_get_contents(h($url))){
 	$title = h($result[1]);
 }else{
     //エラー処理
-    if(count($http_response_header) > 0){
-        //「$http_response_header[0]」にはステータスコードがセットされている
-        $status_code = explode(' ', $http_response_header[0]);  //「$status_code[1]」にステータスコードの数字だけが入る
- 
-        //エラーの判別
-        switch($status_code[1]){
-            //404エラーの場合
-            case 404:
-                echo '<script>window.alert("指定したページが見つかりませんでした")</script>';
-				header('Location: ./about.html');
-                //break;
-            //500エラーの場合
-            case 500:
-                echo '<script>window.alert("指定したページがあるサーバーにエラーがあります")</script>';
-				//header('Location: ./about.html');
-                break;
-            //その他のエラーの場合
-            default:
-                echo '<script>window.alert("何らかのエラーによって指定したページのデータを取得できませんでした")</script>';
-				//header('Location: ./about.html');
-        }
-    }else{
-        //タイムアウトの場合 or 存在しないドメインだった場合
-        echo '<script>window.alert("タイムエラー or URLが間違っています")</script>';
-		//header('Location: ./about.html');
-    }
+    echo '<script>var s=10;setInterval(()=>{s=s-1;document.getElementById("notice").innerHTML="エラーが発生しました。"+s+"秒でホームページに遷移します。";if(s<=0){location.href="./about.html"}},1000);</script>';
 	
 }
 ?>
+
 <link rel="manifest" href="data:application/json;base64,eyJzaG9ydF9uYW1lIjogIlBXQSIsIm5hbWUiOiAiUFdBIiwiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwic3RhcnRfdXJsIjogImluZGV4Lmh0bWwiLCJpY29ucyI6IFt7InNyYyI6ImltYWdlcy9hcHAtaWNvbi0xOTIucG5nIiwic2l6ZXMiOiAiMTkyeDE5MiIsInR5cGUiOiAiaW1hZ2UvcG5nIn1dfQ==">
-<title><?php echo $title;?></title>
+<title><?php 
+if ($title==""){echo h($url);}
+else{echo $title;}?></title>
 <style>
 	body{
 		width:100%;
@@ -65,7 +43,7 @@ if($data = file_get_contents(h($url))){
 </style>
 </head>
 <body>
-<?php echo '<h1>ははは</h1>'; ?>
+<div id="notice"></div>
 <!--<iframe sandbox="allow-same-origin allow-forms allow-scripts" src="https://biology-manabiya.net/" frameborder="no"></iframe>-->
 
 </body>
