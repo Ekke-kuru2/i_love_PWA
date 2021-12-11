@@ -19,7 +19,7 @@ if($data = file_get_contents(h($url))){
 	if($title==""){$title=h($url);}
 }else{
     //エラー処理
-    echo '<script>location.href="./about.html"</script>';
+    echo '<script>location.href="./index.html?error=1"</script>';
 	
 }
 ?>
@@ -46,7 +46,7 @@ echo '"data:application/json;base64,'.$manifest.'"';
 </head>
 <body>
 <div id="notice"></div>
-<iframe sandbox="allow-same-origin allow-forms allow-scripts" src=<?php echo $url;?> frameborder="no"></iframe>
+<iframe src=<?php echo h($url);?> sandbox frameborder="no"></iframe>
 
 </body>
 </html>

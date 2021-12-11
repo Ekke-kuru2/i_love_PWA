@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Everything into App | i love PWA</title>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <style>
+        #main{
+            padding:10px;
+        }
+        form{
+            margin:auto;
+        }
+        .tile{
+            margin:auto;;
+        }
+    </style>
+    <script>
+        window.onload=()=>{
+        var url = new URL(window.location.href);
+        var params = url.searchParams;
+        if(params.get('error')=="1"){
+            document.getElementById("error").innerHTML='<div class="notification is-danger"><button id="delete" class="delete"></button><p>エラーが発生しました。</p><p>正しいURLを入力しましたか?</p><p>URLは<strong>http://またはhttps://</strong>から入力しましたか?</p><p>仕様上<a href="#notice">うまくいかないこと</a>があります。ごめんなさい。</p></div>';
+        }
+        document.getElementById("delete").onclick=()=>{
+            document.getElementById("error").innerHTML='';
+        };
+        };
+    </script>
+</head>
+<body>
+    <div id="error"></div>
+    <section class="hero is-link">
+        
+        <div class="hero-head">
+            <nav class="navbar">
+            <div class="container">
+                <div class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item">
+                    Blog
+                    </a>
+                    <span class="navbar-item">
+                    <a class="button is-link is-inverted">
+                        <span class="icon">
+                            <ion-icon name="logo-github"></ion-icon>
+                        </span>
+                        <span>GitHub</span>
+                    </a>
+                    </span>
+                </div>
+                </div>
+            </div>
+            </nav>
+        </div>
+
+        <div class="hero-body">
+          <p class="title">
+            i love PWA
+          </p>
+          <p class="subtitle">
+            Everything into App
+          </p>
+        </div>
+    </section>
+
+    <div id="main">
+    <form method="GET" action="./pwa.php" id="form" class="box block">
+        <div class="container">
+            <p class="title is-2">試してみよう!!</p>
+            <p></p>
+            <input class="input block" type="text" name="url" placeholder="http://..." />
+            <input class="button is-link block" type="submit" name="btn1" value="PWA!!" />
+        </div>
+    </form>
+
+    <div class="tile is-ancestor">
+        <div class="tile is-12 is-parent is-vertical">
+            <div class="tile is-child box">
+                <p class="title is-2">About</p>
+                <p>i love PWA はPWAに対応していないWebサイトを<a href="#notice" >なんとなく</a>PWA対応にして、ホーム画面からアプリのように開くために作られました。</p>
+            </div>
+            <div class="tile is-child box">
+                <p class="title is-2">How to use</p>
+                <p class="title is-3">1.</p>
+                <p><a href="#form">このフォーム</a>にPWAにしたいWebサイトのURLをhttp:// または https:// から入れる</p>
+                <p class="title is-3">2.</p>
+                <p>開いたページでブラウザの共有ボタンを押し、「ホーム画面に追加」を押す</p>
+                <p class="help">iOS Safariの場合</p>
+                <img width="200px" src=./howto_ios.jpeg />
+            </div>
+            <div class="tile is-child box" id="notice">
+                <p class="title is-2">Notice</p>
+                <p>iframeに入れ込んでるだけなので、対象のサイトに拒否されると使えません。</p>
+                <p>うまくいくときといかないときがあります。</p>
+                <p>アイコンが表示されないです(PWAの意味がない)</p>
+            </div>
+        </div>
+      </div>
+    
+
+    </div>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            <strong>i love PWA</strong>
+          </p>
+          <p>©ekke.jp 2022</p>
+          <p><ion-icon name="logo-github"></ion-icon><a>GitHub</a></p>
+        </div>
+      </footer>
+
+</body>
+</html>
