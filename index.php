@@ -16,17 +16,21 @@ if($data = file_get_contents(h($url))){
 	preg_match('/<title>(.*?)<\/title>/', $html, $result);
 
 	$title = h($result[1]);
+	if($title==""){$title=h($url);}
 }else{
     //エラー処理
-    echo '<script>var s=10;setInterval(()=>{s=s-1;document.getElementById("notice").innerHTML="エラーが発生しました。"+s+"秒でホームページに遷移します。";if(s<=0){location.href="./about.html"}},1000);</script>';
+    echo '<script>location.href="./about.html"</script>';
 	
 }
 ?>
 
-<link rel="manifest" href="data:application/json;base64,eyJzaG9ydF9uYW1lIjogIlBXQSIsIm5hbWUiOiAiUFdBIiwiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwic3RhcnRfdXJsIjogImluZGV4Lmh0bWwiLCJpY29ucyI6IFt7InNyYyI6ImltYWdlcy9hcHAtaWNvbi0xOTIucG5nIiwic2l6ZXMiOiAiMTkyeDE5MiIsInR5cGUiOiAiaW1hZ2UvcG5nIn1dfQ==">
-<title><?php 
-if ($title==""){echo h($url);}
-else{echo $title;}?></title>
+<link rel="manifest" href=<?php
+$img = base64_encode(file_get_contents('https://www.google.com/s2/favicons?domain_url='.$url));
+
+$manifest=base64_encode('{"short_name": "'.$title.'","name": "'.$title.'","display": "standalone","start_url": "index.html"}]}');
+echo 'data:application/json;base64,'.$manifest;
+?>>
+<title><?php echo $title;?></title>
 <style>
 	body{
 		width:100%;
@@ -44,7 +48,7 @@ else{echo $title;}?></title>
 </head>
 <body>
 <div id="notice"></div>
-<!--<iframe sandbox="allow-same-origin allow-forms allow-scripts" src="https://biology-manabiya.net/" frameborder="no"></iframe>-->
+<iframe sandbox="allow-same-origin allow-forms allow-scripts" src=<?php echo $url;?> frameborder="no"></iframe>
 
 </body>
 </html>
