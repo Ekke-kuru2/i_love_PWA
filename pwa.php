@@ -46,7 +46,7 @@ echo '"data:application/json;base64,'.$manifest.'"';
 </head>
 <body>
 <div id="notice"></div>
-<iframe src=<?php echo h($url);?> sandbox frameborder="no"></iframe>
+<iframe src=<?php echo h($url);?> sandbox="allow-scripts allow-same-origin" frameborder="no"></iframe>
 
 </body>
 </html>
